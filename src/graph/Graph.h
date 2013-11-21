@@ -715,10 +715,11 @@ inline void NetworKit::Graph::forNeighborsOf(node u, L handle) const {
 }
 
 template<typename L>
-inline void NetworKit::Graph::forNeighborsOf(node u, L handle) {
-	for (node v : this->adja[u]) {
-		if (v != none) {
-			handle(v);
+inline void NetworKit::Graph::forTwoNeighborsOf(node u, L handle) const {
+	const node neighbors_count = this->adja[u].size();
+	for (int i = 0; i < neighbors_count - 1; i++) {
+		for (int j = i + 1; j < neighbors_count; j++) {
+			handle(this->adja[u][i], this->adja[u][j]);
 		}
 	}
 }
